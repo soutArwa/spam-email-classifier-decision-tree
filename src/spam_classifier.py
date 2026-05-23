@@ -245,11 +245,3 @@ plt.show()
 rules = export_text(dt_resampled, feature_names=list(X.columns))
 print(rules)
 
-""" **Conclusion**
-In this project, we successfully built and evaluated a Decision Tree classifier to detect Spam emails.
-We rigorously followed standard machine learning methodologies by splitting the data into Training (70%), Validation (15%), and Testing (15%) sets.
-
-We proved that Normalization does not affect decision tree splits. We successfully identified and treated Overfitting by pruning the tree to an optimal depth (`max_depth=5`), guided by validation curves.
-Furthermore, we addressed the class bias using SMOTE and adjusted the decision threshold to prioritize catching spam emails.
-Finally, evaluating our optimal model on the strictly unseen Test Set yielded highly reliable results, proving that the model generalizes well to new data.
-"""
