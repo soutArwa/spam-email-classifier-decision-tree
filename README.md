@@ -1,62 +1,86 @@
-# Spam Email Classifier using Decision Tree
+# Spam Email Classification
 
-This project builds a machine learning model to classify emails as **Spam** or **Not Spam** using the Spambase dataset.
+A machine learning project focused on classifying emails as **Spam** or **Not Spam** using a Decision Tree classifier.
 
-## Project Overview
+This project demonstrates a complete supervised machine learning workflow, from dataset preparation and model training to overfitting analysis, class imbalance handling, threshold tuning, and final evaluation.
 
-The goal of this project is to apply a full machine learning workflow, including:
+---
 
-- Splitting the dataset into training, validation, and testing sets
-- Comparing model performance before and after normalization
-- Detecting and fixing overfitting using tree pruning
-- Handling class imbalance using SMOTE
-- Adjusting the classification threshold
-- Evaluating the final model on unseen test data
-- Visualizing the decision tree and extracting decision rules
+## Overview
+
+Spam detection is a common classification problem in machine learning where the goal is to identify whether an email is unwanted spam or a legitimate message.
+
+In this project, a Decision Tree model was built to classify emails based on numerical patterns extracted from email content, including word frequencies, character frequencies, and capital letter usage.
+
+The workflow was designed to go beyond simple model training by analyzing model behavior, improving generalization, and addressing real-world classification challenges such as imbalanced data.
+
+---
 
 ## Dataset
 
-The project uses the Spambase dataset, which contains numerical features related to word frequencies, character frequencies, and capital letter patterns in emails.
+This project uses the **Spambase dataset**, created by Hopkins et al. in 1999.
 
-Target column:
+The dataset contains **4,601 email instances**, with **57 numerical attributes** and one binary class label.
 
-- `0` = Not Spam
-- `1` = Spam
+| Email Type | Class Label | Instances | Percentage |
+|---|---:|---:|---:|
+| Spam | 1 | 1,813 | 39.4% |
+| Not Spam | 0 | 2,788 | 60.6% |
+| Total | - | 4,601 | 100% |
 
-## Technologies Used
+Each email is represented using numerical features that describe the frequency of specific words, characters, and capital letter sequences.
 
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Scikit-learn
-- Imbalanced-learn
-- Decision Tree Classifier
-- SMOTE
+---
 
-## Methodology
+## Project Objectives
 
-### 1. Data Splitting
+- Build a Decision Tree classifier for spam email detection
+- Split the dataset into training, validation, and testing sets
+- Compare model behavior before and after normalization
+- Analyze overfitting using training and validation curves
+- Improve generalization through tree pruning
+- Handle class imbalance using SMOTE
+- Adjust the decision threshold to improve spam detection
+- Evaluate the final model on unseen test data
+- Visualize the Decision Tree and extract readable decision rules
 
-The dataset was split into:
+---
 
-- 70% training set
-- 15% validation set
-- 15% testing set
+## Machine Learning Workflow
 
-### 2. Normalization Comparison
+### 1. Data Preparation
 
-Min-Max normalization was applied and compared against the original data.  
-The results showed that normalization did not affect the Decision Tree performance because Decision Trees are scale-invariant.
+The dataset was divided into three parts:
 
-### 3. Overfitting Analysis
+| Dataset Split | Percentage |
+|---|---:|
+| Training Set | 70% |
+| Validation Set | 15% |
+| Testing Set | 15% |
 
-Training and validation accuracy were compared across different tree depths.  
-The model showed signs of overfitting as tree depth increased.
+The training set was used to train the model, the validation set was used for tuning and comparison, and the test set was kept unseen until final evaluation.
 
-### 4. Overfitting Fix
+---
 
-The Decision Tree was pruned using:
+### 2. Normalization Analysis
+
+Min-Max normalization was applied to compare Decision Tree performance before and after scaling.
+
+The results showed that normalization did not significantly change the model’s predictions. This is expected because Decision Trees are scale-invariant models that split data based on thresholds rather than distance-based calculations.
+
+---
+
+### 3. Overfitting Detection
+
+The model was evaluated across different tree depths by comparing training accuracy and validation accuracy.
+
+As the tree depth increased, training accuracy continued to improve while validation accuracy eventually stopped improving. This indicated that the model was beginning to memorize the training data instead of generalizing well.
+
+---
+
+### 4. Model Pruning
+
+To reduce overfitting, the Decision Tree was pruned by limiting its maximum depth.
 
 ```python
 max_depth = 5
